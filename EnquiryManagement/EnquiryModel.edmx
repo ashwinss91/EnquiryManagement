@@ -1,0 +1,856 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="EnquiryModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="EnquiryModelStoreContainer">
+    <EntitySet Name="Leads" EntityType="EnquiryModel.Store.Leads" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CustomerProfiles" EntityType="EnquiryModel.Store.CustomerProfiles" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="EnquiryTypes" EntityType="EnquiryModel.Store.EnquiryTypes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Applications" EntityType="EnquiryModel.Store.Applications" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Events" EntityType="EnquiryModel.Store.Events" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Advertisements" EntityType="EnquiryModel.Store.Advertisements" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SalesTeams" EntityType="EnquiryModel.Store.SalesTeams" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Opportunities" EntityType="EnquiryModel.Store.Opportunities" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="EnquiryRisks" EntityType="EnquiryModel.Store.EnquiryRisks" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="EnquiryStages" EntityType="EnquiryModel.Store.EnquiryStages" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="EnquiryStatus" EntityType="EnquiryModel.Store.EnquiryStatus" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Priorities" EntityType="EnquiryModel.Store.Priorities" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="LeadOpportunity" Association="EnquiryModel.Store.LeadOpportunity">
+      <End Role="Lead" EntitySet="Leads" />
+      <End Role="Opportunity" EntitySet="Opportunities" />
+    </AssociationSet>
+    <AssociationSet Name="EnquiryTypeLead" Association="EnquiryModel.Store.EnquiryTypeLead">
+      <End Role="EnquiryType" EntitySet="EnquiryTypes" />
+      <End Role="Lead" EntitySet="Leads" />
+    </AssociationSet>
+    <AssociationSet Name="CustomerProfileLead" Association="EnquiryModel.Store.CustomerProfileLead">
+      <End Role="CustomerProfile" EntitySet="CustomerProfiles" />
+      <End Role="Lead" EntitySet="Leads" />
+    </AssociationSet>
+    <AssociationSet Name="SalesTeamLead" Association="EnquiryModel.Store.SalesTeamLead">
+      <End Role="SalesTeam" EntitySet="SalesTeams" />
+      <End Role="Lead" EntitySet="Leads" />
+    </AssociationSet>
+    <AssociationSet Name="EventLead" Association="EnquiryModel.Store.EventLead">
+      <End Role="Event" EntitySet="Events" />
+      <End Role="Lead" EntitySet="Leads" />
+    </AssociationSet>
+    <AssociationSet Name="AdvertisementLead" Association="EnquiryModel.Store.AdvertisementLead">
+      <End Role="Advertisement" EntitySet="Advertisements" />
+      <End Role="Lead" EntitySet="Leads" />
+    </AssociationSet>
+    <AssociationSet Name="ApplicationLead" Association="EnquiryModel.Store.ApplicationLead">
+      <End Role="Application" EntitySet="Applications" />
+      <End Role="Lead" EntitySet="Leads" />
+    </AssociationSet>
+    <AssociationSet Name="EnquiryStageOpportunity" Association="EnquiryModel.Store.EnquiryStageOpportunity">
+      <End Role="EnquiryStage" EntitySet="EnquiryStages" />
+      <End Role="Opportunity" EntitySet="Opportunities" />
+    </AssociationSet>
+    <AssociationSet Name="PriorityOpportunity" Association="EnquiryModel.Store.PriorityOpportunity">
+      <End Role="Priority" EntitySet="Priorities" />
+      <End Role="Opportunity" EntitySet="Opportunities" />
+    </AssociationSet>
+    <AssociationSet Name="EnquiryStatuOpportunity" Association="EnquiryModel.Store.EnquiryStatuOpportunity">
+      <End Role="EnquiryStatu" EntitySet="EnquiryStatus" />
+      <End Role="Opportunity" EntitySet="Opportunities" />
+    </AssociationSet>
+    <AssociationSet Name="EnquiryRiskOpportunity" Association="EnquiryModel.Store.EnquiryRiskOpportunity">
+      <End Role="EnquiryRisk" EntitySet="EnquiryRisks" />
+      <End Role="Opportunity" EntitySet="Opportunities" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Leads">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CustomerName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="FirmName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ContactNo" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="EmailId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="City" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="State" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="EnquiryDate" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Comments" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CreatedOn" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CreatedBy" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ModifiedOn" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ModifiedBy" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IsUrgent" Type="int" Nullable="false" />
+    <Property Name="IsDeactivate" Type="int" Nullable="false" />
+    <Property Name="IsQualify" Type="int" Nullable="false" />
+    <Property Name="IsDisQualify" Type="int" Nullable="false" />
+    <Property Name="EnquiryTypeId" Type="int" Nullable="false" />
+    <Property Name="CustomerProfileId" Type="int" Nullable="false" />
+    <Property Name="SalesTeamId" Type="int" Nullable="false" />
+    <Property Name="EventId" Type="int" Nullable="false" />
+    <Property Name="ApplicationId" Type="int" Nullable="false" />
+    <Property Name="Opportunity_Id" Type="int" Nullable="false" />
+    <Property Name="Advertisement_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CustomerProfiles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EnquiryTypes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Applications">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Events">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="EventDate" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="EventLocation" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Advertisements">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SalesTeams">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Region" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Manager" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Category" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Opportunities">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Potentials" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Probability" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ExpectedClosedDate" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="RemainderDate" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Owner" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CreatedOn" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ModifiedOn" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CreatedBy" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ModifiedBy" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IsMarkComplete" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IsCRMUpdated" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IsFlag" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="EnquiryStageId" Type="int" Nullable="false" />
+    <Property Name="PriorityId" Type="int" Nullable="false" />
+    <Property Name="EnquiryStatuId" Type="int" Nullable="false" />
+    <Property Name="EnquiryRiskId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EnquiryRisks">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EnquiryStages">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EnquiryStatus">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Priorities">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <Association Name="LeadOpportunity">
+    <End Role="Lead" Type="EnquiryModel.Store.Leads" Multiplicity="*" />
+    <End Role="Opportunity" Type="EnquiryModel.Store.Opportunities" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Opportunity">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Lead">
+        <PropertyRef Name="Opportunity_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="EnquiryTypeLead">
+    <End Role="EnquiryType" Type="EnquiryModel.Store.EnquiryTypes" Multiplicity="1" />
+    <End Role="Lead" Type="EnquiryModel.Store.Leads" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EnquiryType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Lead">
+        <PropertyRef Name="EnquiryTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CustomerProfileLead">
+    <End Role="CustomerProfile" Type="EnquiryModel.Store.CustomerProfiles" Multiplicity="1" />
+    <End Role="Lead" Type="EnquiryModel.Store.Leads" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CustomerProfile">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Lead">
+        <PropertyRef Name="CustomerProfileId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SalesTeamLead">
+    <End Role="SalesTeam" Type="EnquiryModel.Store.SalesTeams" Multiplicity="1" />
+    <End Role="Lead" Type="EnquiryModel.Store.Leads" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SalesTeam">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Lead">
+        <PropertyRef Name="SalesTeamId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="EventLead">
+    <End Role="Event" Type="EnquiryModel.Store.Events" Multiplicity="1" />
+    <End Role="Lead" Type="EnquiryModel.Store.Leads" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Event">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Lead">
+        <PropertyRef Name="EventId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AdvertisementLead">
+    <End Role="Advertisement" Type="EnquiryModel.Store.Advertisements" Multiplicity="1" />
+    <End Role="Lead" Type="EnquiryModel.Store.Leads" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Advertisement">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Lead">
+        <PropertyRef Name="Advertisement_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ApplicationLead">
+    <End Role="Application" Type="EnquiryModel.Store.Applications" Multiplicity="1" />
+    <End Role="Lead" Type="EnquiryModel.Store.Leads" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Application">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Lead">
+        <PropertyRef Name="ApplicationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="EnquiryStageOpportunity">
+    <End Role="EnquiryStage" Type="EnquiryModel.Store.EnquiryStages" Multiplicity="1" />
+    <End Role="Opportunity" Type="EnquiryModel.Store.Opportunities" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EnquiryStage">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Opportunity">
+        <PropertyRef Name="EnquiryStageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PriorityOpportunity">
+    <End Role="Priority" Type="EnquiryModel.Store.Priorities" Multiplicity="1" />
+    <End Role="Opportunity" Type="EnquiryModel.Store.Opportunities" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Priority">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Opportunity">
+        <PropertyRef Name="PriorityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="EnquiryStatuOpportunity">
+    <End Role="EnquiryStatu" Type="EnquiryModel.Store.EnquiryStatus" Multiplicity="1" />
+    <End Role="Opportunity" Type="EnquiryModel.Store.Opportunities" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EnquiryStatu">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Opportunity">
+        <PropertyRef Name="EnquiryStatuId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="EnquiryRiskOpportunity">
+    <End Role="EnquiryRisk" Type="EnquiryModel.Store.EnquiryRisks" Multiplicity="1" />
+    <End Role="Opportunity" Type="EnquiryModel.Store.Opportunities" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EnquiryRisk">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Opportunity">
+        <PropertyRef Name="EnquiryRiskId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="EnquiryModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="EnquiryModelContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Leads" EntityType="EnquiryModel.Lead" />
+          <EntitySet Name="CustomerProfiles" EntityType="EnquiryModel.CustomerProfile" />
+          <EntitySet Name="EnquiryTypes" EntityType="EnquiryModel.EnquiryType" />
+          <EntitySet Name="Applications" EntityType="EnquiryModel.Application" />
+          <EntitySet Name="Events" EntityType="EnquiryModel.Event" />
+          <EntitySet Name="Advertisements" EntityType="EnquiryModel.Advertisement" />
+          <EntitySet Name="SalesTeams" EntityType="EnquiryModel.SalesTeam" />
+          <EntitySet Name="Opportunities" EntityType="EnquiryModel.Opportunity" />
+          <EntitySet Name="EnquiryRisks" EntityType="EnquiryModel.EnquiryRisk" />
+          <EntitySet Name="EnquiryStages" EntityType="EnquiryModel.EnquiryStage" />
+          <EntitySet Name="EnquiryStatus" EntityType="EnquiryModel.EnquiryStatu" />
+          <EntitySet Name="Priorities" EntityType="EnquiryModel.Priority" />
+          <AssociationSet Name="LeadOpportunity" Association="EnquiryModel.LeadOpportunity">
+            <End Role="Lead" EntitySet="Leads" />
+            <End Role="Opportunity" EntitySet="Opportunities" />
+          </AssociationSet>
+          <AssociationSet Name="EnquiryTypeLead" Association="EnquiryModel.EnquiryTypeLead">
+            <End Role="EnquiryType" EntitySet="EnquiryTypes" />
+            <End Role="Lead" EntitySet="Leads" />
+          </AssociationSet>
+          <AssociationSet Name="CustomerProfileLead" Association="EnquiryModel.CustomerProfileLead">
+            <End Role="CustomerProfile" EntitySet="CustomerProfiles" />
+            <End Role="Lead" EntitySet="Leads" />
+          </AssociationSet>
+          <AssociationSet Name="SalesTeamLead" Association="EnquiryModel.SalesTeamLead">
+            <End Role="SalesTeam" EntitySet="SalesTeams" />
+            <End Role="Lead" EntitySet="Leads" />
+          </AssociationSet>
+          <AssociationSet Name="EventLead" Association="EnquiryModel.EventLead">
+            <End Role="Event" EntitySet="Events" />
+            <End Role="Lead" EntitySet="Leads" />
+          </AssociationSet>
+          <AssociationSet Name="AdvertisementLead" Association="EnquiryModel.AdvertisementLead">
+            <End Role="Advertisement" EntitySet="Advertisements" />
+            <End Role="Lead" EntitySet="Leads" />
+          </AssociationSet>
+          <AssociationSet Name="ApplicationLead" Association="EnquiryModel.ApplicationLead">
+            <End Role="Application" EntitySet="Applications" />
+            <End Role="Lead" EntitySet="Leads" />
+          </AssociationSet>
+          <AssociationSet Name="EnquiryStageOpportunity" Association="EnquiryModel.EnquiryStageOpportunity">
+            <End Role="EnquiryStage" EntitySet="EnquiryStages" />
+            <End Role="Opportunity" EntitySet="Opportunities" />
+          </AssociationSet>
+          <AssociationSet Name="PriorityOpportunity" Association="EnquiryModel.PriorityOpportunity">
+            <End Role="Priority" EntitySet="Priorities" />
+            <End Role="Opportunity" EntitySet="Opportunities" />
+          </AssociationSet>
+          <AssociationSet Name="EnquiryStatuOpportunity" Association="EnquiryModel.EnquiryStatuOpportunity">
+            <End Role="EnquiryStatu" EntitySet="EnquiryStatus" />
+            <End Role="Opportunity" EntitySet="Opportunities" />
+          </AssociationSet>
+          <AssociationSet Name="EnquiryRiskOpportunity" Association="EnquiryModel.EnquiryRiskOpportunity">
+            <End Role="EnquiryRisk" EntitySet="EnquiryRisks" />
+            <End Role="Opportunity" EntitySet="Opportunities" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Lead">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerName" Type="String" Nullable="false" />
+          <Property Name="FirmName" Type="String" Nullable="false" />
+          <Property Name="ContactNo" Type="String" Nullable="false" />
+          <Property Name="EmailId" Type="String" Nullable="false" />
+          <Property Name="City" Type="String" Nullable="false" />
+          <Property Name="State" Type="String" Nullable="false" />
+          <Property Name="EnquiryDate" Type="String" Nullable="false" />
+          <Property Name="Comments" Type="String" Nullable="false" />
+          <Property Name="CreatedOn" Type="String" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" />
+          <Property Name="ModifiedOn" Type="String" Nullable="false" />
+          <Property Name="ModifiedBy" Type="String" Nullable="false" />
+          <Property Name="IsUrgent" Type="EnquiryModel.IsUrgent" Nullable="false" />
+          <Property Name="IsDeactivate" Type="EnquiryModel.IsDeactivate" Nullable="false" />
+          <Property Name="IsQualify" Type="EnquiryModel.IsQualify" Nullable="false" />
+          <Property Name="IsDisQualify" Type="EnquiryModel.IsDisQualify" Nullable="false" />
+          <NavigationProperty Name="Opportunity" Relationship="EnquiryModel.LeadOpportunity" FromRole="Lead" ToRole="Opportunity" />
+          <NavigationProperty Name="EnquiryType" Relationship="EnquiryModel.EnquiryTypeLead" FromRole="Lead" ToRole="EnquiryType" />
+          <Property Name="EnquiryTypeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CustomerProfile" Relationship="EnquiryModel.CustomerProfileLead" FromRole="Lead" ToRole="CustomerProfile" />
+          <Property Name="CustomerProfileId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="SalesTeam" Relationship="EnquiryModel.SalesTeamLead" FromRole="Lead" ToRole="SalesTeam" />
+          <Property Name="SalesTeamId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Event" Relationship="EnquiryModel.EventLead" FromRole="Lead" ToRole="Event" />
+          <Property Name="EventId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Advertisement" Relationship="EnquiryModel.AdvertisementLead" FromRole="Lead" ToRole="Advertisement" />
+          <NavigationProperty Name="Application" Relationship="EnquiryModel.ApplicationLead" FromRole="Lead" ToRole="Application" />
+          <Property Name="ApplicationId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CustomerProfile">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <NavigationProperty Name="Leads" Relationship="EnquiryModel.CustomerProfileLead" FromRole="CustomerProfile" ToRole="Lead" />
+        </EntityType>
+        <EntityType Name="EnquiryType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <NavigationProperty Name="Leads" Relationship="EnquiryModel.EnquiryTypeLead" FromRole="EnquiryType" ToRole="Lead" />
+        </EntityType>
+        <EntityType Name="Application">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+          <Property Name="Name" Nullable="false" Type="String" />
+          <NavigationProperty Name="Leads" Relationship="EnquiryModel.ApplicationLead" FromRole="Application" ToRole="Lead" />
+        </EntityType>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="EventDate" Type="String" Nullable="false" />
+          <Property Name="EventLocation" Type="String" Nullable="false" />
+          <NavigationProperty Name="Leads" Relationship="EnquiryModel.EventLead" FromRole="Event" ToRole="Lead" />
+        </EntityType>
+        <EntityType Name="Advertisement">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <NavigationProperty Name="Leads" Relationship="EnquiryModel.AdvertisementLead" FromRole="Advertisement" ToRole="Lead" />
+        </EntityType>
+        <EntityType Name="SalesTeam">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Region" Type="String" Nullable="false" />
+          <Property Name="Manager" Type="String" Nullable="false" />
+          <Property Name="Category" Type="String" Nullable="false" />
+          <NavigationProperty Name="Leads" Relationship="EnquiryModel.SalesTeamLead" FromRole="SalesTeam" ToRole="Lead" />
+        </EntityType>
+        <EntityType Name="Opportunity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Potentials" Type="String" Nullable="false" />
+          <Property Name="Probability" Type="String" Nullable="false" />
+          <Property Name="ExpectedClosedDate" Type="String" Nullable="false" />
+          <Property Name="RemainderDate" Type="String" Nullable="false" />
+          <Property Name="Owner" Type="String" Nullable="false" />
+          <Property Name="CreatedOn" Type="String" Nullable="false" />
+          <Property Name="ModifiedOn" Type="String" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" />
+          <Property Name="ModifiedBy" Type="String" Nullable="false" />
+          <Property Name="IsMarkComplete" Type="String" Nullable="false" />
+          <Property Name="IsCRMUpdated" Type="String" Nullable="false" />
+          <Property Name="IsFlag" Type="String" Nullable="false" />
+          <NavigationProperty Name="Lead" Relationship="EnquiryModel.LeadOpportunity" FromRole="Opportunity" ToRole="Lead" />
+          <NavigationProperty Name="EnquiryStage" Relationship="EnquiryModel.EnquiryStageOpportunity" FromRole="Opportunity" ToRole="EnquiryStage" />
+          <Property Name="EnquiryStageId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Priority" Relationship="EnquiryModel.PriorityOpportunity" FromRole="Opportunity" ToRole="Priority" />
+          <Property Name="PriorityId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="EnquiryStatu" Relationship="EnquiryModel.EnquiryStatuOpportunity" FromRole="Opportunity" ToRole="EnquiryStatu" />
+          <Property Name="EnquiryStatuId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="EnquiryRisk" Relationship="EnquiryModel.EnquiryRiskOpportunity" FromRole="Opportunity" ToRole="EnquiryRisk" />
+          <Property Name="EnquiryRiskId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EnquiryRisk">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <NavigationProperty Name="Opportunities" Relationship="EnquiryModel.EnquiryRiskOpportunity" FromRole="EnquiryRisk" ToRole="Opportunity" />
+        </EntityType>
+        <EntityType Name="EnquiryStage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <NavigationProperty Name="Opportunities" Relationship="EnquiryModel.EnquiryStageOpportunity" FromRole="EnquiryStage" ToRole="Opportunity" />
+        </EntityType>
+        <EntityType Name="EnquiryStatu">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <NavigationProperty Name="Opportunities" Relationship="EnquiryModel.EnquiryStatuOpportunity" FromRole="EnquiryStatu" ToRole="Opportunity" />
+        </EntityType>
+        <EntityType Name="Priority">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <NavigationProperty Name="Opportunities" Relationship="EnquiryModel.PriorityOpportunity" FromRole="Priority" ToRole="Opportunity" />
+        </EntityType>
+        <Association Name="LeadOpportunity">
+          <End Type="EnquiryModel.Lead" Role="Lead" Multiplicity="1" />
+          <End Type="EnquiryModel.Opportunity" Role="Opportunity" Multiplicity="1" />
+        </Association>
+        <EnumType Name="IsUrgent">
+          <Member Name="YES" />
+          <Member Name="NO" />
+        </EnumType>
+        <EnumType Name="IsDeactivate">
+          <Member Name="YES" />
+          <Member Name="NO" />
+        </EnumType>
+        <EnumType Name="IsQualify">
+          <Member Name="YES" />
+          <Member Name="NO" />
+        </EnumType>
+        <EnumType Name="IsDisQualify">
+          <Member Name="YES" />
+          <Member Name="NO" />
+        </EnumType>
+        <EnumType Name="IsMarkComplete">
+          <Member Name="YES" />
+          <Member Name="NO" />
+        </EnumType>
+        <EnumType Name="IsCRMUpdated">
+          <Member Name="YES" />
+          <Member Name="NO" />
+        </EnumType>
+        <EnumType Name="IsFlag">
+          <Member Name="YES" />
+          <Member Name="NO" />
+        </EnumType>
+        <Association Name="EnquiryTypeLead">
+          <End Type="EnquiryModel.EnquiryType" Role="EnquiryType" Multiplicity="1" />
+          <End Type="EnquiryModel.Lead" Role="Lead" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EnquiryType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Lead">
+              <PropertyRef Name="EnquiryTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CustomerProfileLead">
+          <End Type="EnquiryModel.CustomerProfile" Role="CustomerProfile" Multiplicity="1" />
+          <End Type="EnquiryModel.Lead" Role="Lead" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomerProfile">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Lead">
+              <PropertyRef Name="CustomerProfileId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SalesTeamLead">
+          <End Type="EnquiryModel.SalesTeam" Role="SalesTeam" Multiplicity="1" />
+          <End Type="EnquiryModel.Lead" Role="Lead" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SalesTeam">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Lead">
+              <PropertyRef Name="SalesTeamId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EventLead">
+          <End Type="EnquiryModel.Event" Role="Event" Multiplicity="1" />
+          <End Type="EnquiryModel.Lead" Role="Lead" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Event">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Lead">
+              <PropertyRef Name="EventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AdvertisementLead">
+          <End Type="EnquiryModel.Advertisement" Role="Advertisement" Multiplicity="1" />
+          <End Type="EnquiryModel.Lead" Role="Lead" Multiplicity="*" />
+        </Association>
+        <Association Name="ApplicationLead">
+          <End Type="EnquiryModel.Application" Role="Application" Multiplicity="1" />
+          <End Type="EnquiryModel.Lead" Role="Lead" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Application">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Lead">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EnquiryStageOpportunity">
+          <End Type="EnquiryModel.EnquiryStage" Role="EnquiryStage" Multiplicity="1" />
+          <End Type="EnquiryModel.Opportunity" Role="Opportunity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EnquiryStage">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Opportunity">
+              <PropertyRef Name="EnquiryStageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PriorityOpportunity">
+          <End Type="EnquiryModel.Priority" Role="Priority" Multiplicity="1" />
+          <End Type="EnquiryModel.Opportunity" Role="Opportunity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Priority">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Opportunity">
+              <PropertyRef Name="PriorityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EnquiryStatuOpportunity">
+          <End Type="EnquiryModel.EnquiryStatu" Role="EnquiryStatu" Multiplicity="1" />
+          <End Type="EnquiryModel.Opportunity" Role="Opportunity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EnquiryStatu">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Opportunity">
+              <PropertyRef Name="EnquiryStatuId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EnquiryRiskOpportunity">
+          <End Type="EnquiryModel.EnquiryRisk" Role="EnquiryRisk" Multiplicity="1" />
+          <End Type="EnquiryModel.Opportunity" Role="Opportunity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EnquiryRisk">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Opportunity">
+              <PropertyRef Name="EnquiryRiskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="EnquiryModelStoreContainer" CdmEntityContainer="EnquiryModelContainer">
+    <EntitySetMapping Name="Leads">
+      <EntityTypeMapping TypeName="IsTypeOf(EnquiryModel.Lead)">
+        <MappingFragment StoreEntitySet="Leads">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+          <ScalarProperty Name="FirmName" ColumnName="FirmName" />
+          <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+          <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="EnquiryDate" ColumnName="EnquiryDate" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="IsUrgent" ColumnName="IsUrgent" />
+          <ScalarProperty Name="IsDeactivate" ColumnName="IsDeactivate" />
+          <ScalarProperty Name="IsQualify" ColumnName="IsQualify" />
+          <ScalarProperty Name="IsDisQualify" ColumnName="IsDisQualify" />
+          <ScalarProperty Name="EnquiryTypeId" ColumnName="EnquiryTypeId" />
+          <ScalarProperty Name="CustomerProfileId" ColumnName="CustomerProfileId" />
+          <ScalarProperty Name="SalesTeamId" ColumnName="SalesTeamId" />
+          <ScalarProperty Name="EventId" ColumnName="EventId" />
+          <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CustomerProfiles">
+      <EntityTypeMapping TypeName="IsTypeOf(EnquiryModel.CustomerProfile)">
+        <MappingFragment StoreEntitySet="CustomerProfiles">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EnquiryTypes">
+      <EntityTypeMapping TypeName="IsTypeOf(EnquiryModel.EnquiryType)">
+        <MappingFragment StoreEntitySet="EnquiryTypes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Applications">
+      <EntityTypeMapping TypeName="IsTypeOf(EnquiryModel.Application)">
+        <MappingFragment StoreEntitySet="Applications">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Events">
+      <EntityTypeMapping TypeName="IsTypeOf(EnquiryModel.Event)">
+        <MappingFragment StoreEntitySet="Events">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="EventDate" ColumnName="EventDate" />
+          <ScalarProperty Name="EventLocation" ColumnName="EventLocation" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Advertisements">
+      <EntityTypeMapping TypeName="IsTypeOf(EnquiryModel.Advertisement)">
+        <MappingFragment StoreEntitySet="Advertisements">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SalesTeams">
+      <EntityTypeMapping TypeName="IsTypeOf(EnquiryModel.SalesTeam)">
+        <MappingFragment StoreEntitySet="SalesTeams">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Region" ColumnName="Region" />
+          <ScalarProperty Name="Manager" ColumnName="Manager" />
+          <ScalarProperty Name="Category" ColumnName="Category" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Opportunities">
+      <EntityTypeMapping TypeName="IsTypeOf(EnquiryModel.Opportunity)">
+        <MappingFragment StoreEntitySet="Opportunities">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Potentials" ColumnName="Potentials" />
+          <ScalarProperty Name="Probability" ColumnName="Probability" />
+          <ScalarProperty Name="ExpectedClosedDate" ColumnName="ExpectedClosedDate" />
+          <ScalarProperty Name="RemainderDate" ColumnName="RemainderDate" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="IsMarkComplete" ColumnName="IsMarkComplete" />
+          <ScalarProperty Name="IsCRMUpdated" ColumnName="IsCRMUpdated" />
+          <ScalarProperty Name="IsFlag" ColumnName="IsFlag" />
+          <ScalarProperty Name="EnquiryStageId" ColumnName="EnquiryStageId" />
+          <ScalarProperty Name="PriorityId" ColumnName="PriorityId" />
+          <ScalarProperty Name="EnquiryStatuId" ColumnName="EnquiryStatuId" />
+          <ScalarProperty Name="EnquiryRiskId" ColumnName="EnquiryRiskId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EnquiryRisks">
+      <EntityTypeMapping TypeName="IsTypeOf(EnquiryModel.EnquiryRisk)">
+        <MappingFragment StoreEntitySet="EnquiryRisks">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EnquiryStages">
+      <EntityTypeMapping TypeName="IsTypeOf(EnquiryModel.EnquiryStage)">
+        <MappingFragment StoreEntitySet="EnquiryStages">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EnquiryStatus">
+      <EntityTypeMapping TypeName="IsTypeOf(EnquiryModel.EnquiryStatu)">
+        <MappingFragment StoreEntitySet="EnquiryStatus">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Priorities">
+      <EntityTypeMapping TypeName="IsTypeOf(EnquiryModel.Priority)">
+        <MappingFragment StoreEntitySet="Priorities">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="LeadOpportunity" TypeName="EnquiryModel.LeadOpportunity" StoreEntitySet="Leads">
+      <EndProperty Name="Opportunity">
+        <ScalarProperty Name="Id" ColumnName="Opportunity_Id" />
+      </EndProperty>
+      <EndProperty Name="Lead">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="AdvertisementLead" TypeName="EnquiryModel.AdvertisementLead" StoreEntitySet="Leads">
+      <EndProperty Name="Advertisement">
+        <ScalarProperty Name="Id" ColumnName="Advertisement_Id" />
+      </EndProperty>
+      <EndProperty Name="Lead">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
