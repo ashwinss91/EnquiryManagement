@@ -37,5 +37,7 @@ namespace EnquiryManagement
         public virtual DbSet<EnquiryStage> EnquiryStages { get; set; }
         public virtual DbSet<EnquiryStatu> EnquiryStatus { get; set; }
         public virtual DbSet<Priority> Priorities { get; set; }
+        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<RoleType> RoleTypes { get; set; }
     }
 }

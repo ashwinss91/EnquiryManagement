@@ -23,6 +23,7 @@ namespace EnquiryManagement.Controllers
     [RoutePrefix("api/Account")]
     public class AccountController : ApiController
     {
+        private EnquiryModelContainer db = new EnquiryModelContainer();
         private const string LocalLoginProvider = "Local";
         private ApplicationUserManager _userManager;
 
@@ -125,7 +126,7 @@ namespace EnquiryManagement.Controllers
 
             IdentityResult result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword,
                 model.NewPassword);
-            
+
             if (!result.Succeeded)
             {
                 return GetErrorResult(result);
@@ -258,9 +259,9 @@ namespace EnquiryManagement.Controllers
             if (hasRegistered)
             {
                 Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
-                
-                 ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(UserManager,
-                    OAuthDefaults.AuthenticationType);
+
+                ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(UserManager,
+                   OAuthDefaults.AuthenticationType);
                 ClaimsIdentity cookieIdentity = await user.GenerateUserIdentityAsync(UserManager,
                     CookieAuthenticationDefaults.AuthenticationType);
 
@@ -336,7 +337,8 @@ namespace EnquiryManagement.Controllers
             {
                 return GetErrorResult(result);
             }
-
+            db.Users.Add(new User() { Name = "ashwin", RoleTypeId = 1 });
+            await db.SaveChangesAsync();
             return Ok();
         }
 
@@ -368,7 +370,7 @@ namespace EnquiryManagement.Controllers
             result = await UserManager.AddLoginAsync(user.Id, info.Login);
             if (!result.Succeeded)
             {
-                return GetErrorResult(result); 
+                return GetErrorResult(result);
             }
             return Ok();
         }

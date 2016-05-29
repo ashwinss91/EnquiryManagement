@@ -382,6 +382,16 @@
             <End Role="EnquiryRisk" EntitySet="EnquiryRisks" />
             <End Role="Opportunity" EntitySet="Opportunities" />
           </AssociationSet>
+          <EntitySet Name="Users" EntityType="EnquiryModel.User" />
+          <EntitySet Name="RoleTypes" EntityType="EnquiryModel.RoleType" />
+          <AssociationSet Name="RoleTypeUser" Association="EnquiryModel.RoleTypeUser">
+            <End Role="RoleType" EntitySet="RoleTypes" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="UserLead" Association="EnquiryModel.UserLead">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Lead" EntitySet="Leads" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Lead">
           <Key>
@@ -416,6 +426,8 @@
           <NavigationProperty Name="Advertisement" Relationship="EnquiryModel.AdvertisementLead" FromRole="Lead" ToRole="Advertisement" />
           <NavigationProperty Name="Application" Relationship="EnquiryModel.ApplicationLead" FromRole="Lead" ToRole="Application" />
           <Property Name="ApplicationId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="EnquiryModel.UserLead" FromRole="Lead" ToRole="User" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="CustomerProfile">
           <Key>
@@ -670,6 +682,48 @@
             </Principal>
             <Dependent Role="Opportunity">
               <PropertyRef Name="EnquiryRiskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <NavigationProperty Name="RoleType" Relationship="EnquiryModel.RoleTypeUser" FromRole="User" ToRole="RoleType" />
+          <Property Name="RoleTypeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Leads" Relationship="EnquiryModel.UserLead" FromRole="User" ToRole="Lead" />
+        </EntityType>
+        <EntityType Name="RoleType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="EnquiryModel.RoleTypeUser" FromRole="RoleType" ToRole="User" />
+        </EntityType>
+        <Association Name="RoleTypeUser">
+          <End Type="EnquiryModel.RoleType" Role="RoleType" Multiplicity="1" />
+          <End Type="EnquiryModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RoleType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="RoleTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserLead">
+          <End Type="EnquiryModel.User" Role="User" Multiplicity="1" />
+          <End Type="EnquiryModel.Lead" Role="Lead" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Lead">
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>

@@ -36,6 +36,7 @@ namespace EnquiryManagement
         public int SalesTeamId { get; set; }
         public int EventId { get; set; }
         public int ApplicationId { get; set; }
+        public int UserId { get; set; }
     
         public virtual Opportunity Opportunity { get; set; }
         public virtual EnquiryType EnquiryType { get; set; }
@@ -44,5 +45,6 @@ namespace EnquiryManagement
         public virtual Event Event { get; set; }
         public virtual Advertisement Advertisement { get; set; }
         public virtual Application Application { get; set; }
+        public virtual User User { get; set; }
     }
 }
