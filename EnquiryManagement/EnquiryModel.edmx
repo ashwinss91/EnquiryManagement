@@ -18,6 +18,8 @@
     <EntitySet Name="EnquiryStages" EntityType="EnquiryModel.Store.EnquiryStages" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="EnquiryStatus" EntityType="EnquiryModel.Store.EnquiryStatus" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Priorities" EntityType="EnquiryModel.Store.Priorities" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Users" EntityType="EnquiryModel.Store.Users" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="RoleTypes" EntityType="EnquiryModel.Store.RoleTypes" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="LeadOpportunity" Association="EnquiryModel.Store.LeadOpportunity">
       <End Role="Lead" EntitySet="Leads" />
       <End Role="Opportunity" EntitySet="Opportunities" />
@@ -62,6 +64,14 @@
       <End Role="EnquiryRisk" EntitySet="EnquiryRisks" />
       <End Role="Opportunity" EntitySet="Opportunities" />
     </AssociationSet>
+    <AssociationSet Name="RoleTypeUser" Association="EnquiryModel.Store.RoleTypeUser">
+      <End Role="RoleType" EntitySet="RoleTypes" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="UserLead" Association="EnquiryModel.Store.UserLead">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Lead" EntitySet="Leads" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Leads">
     <Key>
@@ -89,6 +99,7 @@
     <Property Name="SalesTeamId" Type="int" Nullable="false" />
     <Property Name="EventId" Type="int" Nullable="false" />
     <Property Name="ApplicationId" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
     <Property Name="Opportunity_Id" Type="int" Nullable="false" />
     <Property Name="Advertisement_Id" Type="int" Nullable="false" />
   </EntityType>
@@ -183,6 +194,21 @@
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="Priorities">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="RoleTypeId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RoleTypes">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
@@ -318,6 +344,30 @@
       </Principal>
       <Dependent Role="Opportunity">
         <PropertyRef Name="EnquiryRiskId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RoleTypeUser">
+    <End Role="RoleType" Type="EnquiryModel.Store.RoleTypes" Multiplicity="1" />
+    <End Role="User" Type="EnquiryModel.Store.Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RoleType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="RoleTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserLead">
+    <End Role="User" Type="EnquiryModel.Store.Users" Multiplicity="1" />
+    <End Role="Lead" Type="EnquiryModel.Store.Leads" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Lead">
+        <PropertyRef Name="UserId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -758,6 +808,7 @@
           <ScalarProperty Name="SalesTeamId" ColumnName="SalesTeamId" />
           <ScalarProperty Name="EventId" ColumnName="EventId" />
           <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -864,6 +915,23 @@
     <EntitySetMapping Name="Priorities">
       <EntityTypeMapping TypeName="IsTypeOf(EnquiryModel.Priority)">
         <MappingFragment StoreEntitySet="Priorities">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="IsTypeOf(EnquiryModel.User)">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="RoleTypeId" ColumnName="RoleTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RoleTypes">
+      <EntityTypeMapping TypeName="IsTypeOf(EnquiryModel.RoleType)">
+        <MappingFragment StoreEntitySet="RoleTypes">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
         </MappingFragment>

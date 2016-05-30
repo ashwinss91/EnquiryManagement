@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 05/29/2016 15:32:56
+-- Date Created: 05/30/2016 10:37:03
 -- Generated from EDMX file: C:\Users\ashwin.sriram\Documents\GitHub\EnquiryManagement\EnquiryManagement\EnquiryModel.edmx
 -- --------------------------------------------------
 
@@ -20,35 +20,35 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_LeadOpportunity]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Leads] DROP CONSTRAINT [FK_LeadOpportunity];
 GO
-IF OBJECT_ID(N'[dbo].[FK_LeadCustomerProfile]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[CustomerProfiles] DROP CONSTRAINT [FK_LeadCustomerProfile];
+IF OBJECT_ID(N'[dbo].[FK_EnquiryTypeLead]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Leads] DROP CONSTRAINT [FK_EnquiryTypeLead];
 GO
-IF OBJECT_ID(N'[dbo].[FK_LeadEnquiryType]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[EnquiryTypes] DROP CONSTRAINT [FK_LeadEnquiryType];
+IF OBJECT_ID(N'[dbo].[FK_CustomerProfileLead]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Leads] DROP CONSTRAINT [FK_CustomerProfileLead];
 GO
-IF OBJECT_ID(N'[dbo].[FK_LeadEvents]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Events] DROP CONSTRAINT [FK_LeadEvents];
+IF OBJECT_ID(N'[dbo].[FK_SalesTeamLead]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Leads] DROP CONSTRAINT [FK_SalesTeamLead];
 GO
-IF OBJECT_ID(N'[dbo].[FK_LeadAdvertisement]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Advertisements] DROP CONSTRAINT [FK_LeadAdvertisement];
+IF OBJECT_ID(N'[dbo].[FK_EventLead]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Leads] DROP CONSTRAINT [FK_EventLead];
 GO
-IF OBJECT_ID(N'[dbo].[FK_LeadApplication]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Applications] DROP CONSTRAINT [FK_LeadApplication];
+IF OBJECT_ID(N'[dbo].[FK_AdvertisementLead]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Leads] DROP CONSTRAINT [FK_AdvertisementLead];
 GO
-IF OBJECT_ID(N'[dbo].[FK_LeadSalesTeam]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[SalesTeams] DROP CONSTRAINT [FK_LeadSalesTeam];
+IF OBJECT_ID(N'[dbo].[FK_ApplicationLead]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Leads] DROP CONSTRAINT [FK_ApplicationLead];
 GO
-IF OBJECT_ID(N'[dbo].[FK_OpportunityEnquiryStage]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[EnquiryStages] DROP CONSTRAINT [FK_OpportunityEnquiryStage];
+IF OBJECT_ID(N'[dbo].[FK_EnquiryStageOpportunity]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Opportunities] DROP CONSTRAINT [FK_EnquiryStageOpportunity];
 GO
-IF OBJECT_ID(N'[dbo].[FK_OpportunityPriority]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Priorities] DROP CONSTRAINT [FK_OpportunityPriority];
+IF OBJECT_ID(N'[dbo].[FK_PriorityOpportunity]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Opportunities] DROP CONSTRAINT [FK_PriorityOpportunity];
 GO
-IF OBJECT_ID(N'[dbo].[FK_OpportunityEnquiryStatus]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[EnquiryStatus] DROP CONSTRAINT [FK_OpportunityEnquiryStatus];
+IF OBJECT_ID(N'[dbo].[FK_EnquiryStatuOpportunity]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Opportunities] DROP CONSTRAINT [FK_EnquiryStatuOpportunity];
 GO
-IF OBJECT_ID(N'[dbo].[FK_OpportunityEnquiryRisk]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[EnquiryRisks] DROP CONSTRAINT [FK_OpportunityEnquiryRisk];
+IF OBJECT_ID(N'[dbo].[FK_EnquiryRiskOpportunity]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Opportunities] DROP CONSTRAINT [FK_EnquiryRiskOpportunity];
 GO
 
 -- --------------------------------------------------
@@ -120,6 +120,7 @@ CREATE TABLE [dbo].[Leads] (
     [SalesTeamId] int  NOT NULL,
     [EventId] int  NOT NULL,
     [ApplicationId] int  NOT NULL,
+    [UserId] int  NOT NULL,
     [Opportunity_Id] int  NOT NULL,
     [Advertisement_Id] int  NOT NULL
 );
@@ -222,6 +223,21 @@ CREATE TABLE [dbo].[Priorities] (
 );
 GO
 
+-- Creating table 'Users'
+CREATE TABLE [dbo].[Users] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [Name] nvarchar(max)  NOT NULL,
+    [RoleTypeId] int  NOT NULL
+);
+GO
+
+-- Creating table 'RoleTypes'
+CREATE TABLE [dbo].[RoleTypes] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [Name] nvarchar(max)  NOT NULL
+);
+GO
+
 -- --------------------------------------------------
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
@@ -295,6 +311,18 @@ GO
 -- Creating primary key on [Id] in table 'Priorities'
 ALTER TABLE [dbo].[Priorities]
 ADD CONSTRAINT [PK_Priorities]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'Users'
+ALTER TABLE [dbo].[Users]
+ADD CONSTRAINT [PK_Users]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'RoleTypes'
+ALTER TABLE [dbo].[RoleTypes]
+ADD CONSTRAINT [PK_RoleTypes]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -465,6 +493,36 @@ GO
 CREATE INDEX [IX_FK_EnquiryRiskOpportunity]
 ON [dbo].[Opportunities]
     ([EnquiryRiskId]);
+GO
+
+-- Creating foreign key on [RoleTypeId] in table 'Users'
+ALTER TABLE [dbo].[Users]
+ADD CONSTRAINT [FK_RoleTypeUser]
+    FOREIGN KEY ([RoleTypeId])
+    REFERENCES [dbo].[RoleTypes]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_RoleTypeUser'
+CREATE INDEX [IX_FK_RoleTypeUser]
+ON [dbo].[Users]
+    ([RoleTypeId]);
+GO
+
+-- Creating foreign key on [UserId] in table 'Leads'
+ALTER TABLE [dbo].[Leads]
+ADD CONSTRAINT [FK_UserLead]
+    FOREIGN KEY ([UserId])
+    REFERENCES [dbo].[Users]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_UserLead'
+CREATE INDEX [IX_FK_UserLead]
+ON [dbo].[Leads]
+    ([UserId]);
 GO
 
 -- --------------------------------------------------
