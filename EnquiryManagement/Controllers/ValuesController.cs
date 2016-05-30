@@ -7,7 +7,7 @@ using System.Web.Http;
 
 namespace EnquiryManagement.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class ValuesController : ApiController
     {
         // GET api/values
